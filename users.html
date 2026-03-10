@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>User Access Report</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+font-family:Arial;
+background:#1e3c72;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+table{
+width:80%;
+margin:auto;
+border-collapse:collapse;
+background:white;
+color:black;
+}
+
+th,td{
+padding:12px;
+border:1px solid gray;
+}
+
+th{
+background:#00aaff;
+color:white;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+font-size:16px;
+border:none;
+background:#ff4444;
+color:white;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>User Access Report</h1>
+
+<table id="userTable">
+
+<tr>
+<th>Name</th>
+<th>Register No</th>
+<th>Profession</th>
+<th>College</th>
+<th>Mobile</th>
+<th>Email</th>
+<th>Access Time</th>
+</tr>
+
+</table>
+
+<button onclick="clearData()">Clear Data</button>
+
+<script>
+
+let users=JSON.parse(localStorage.getItem("userList")) || [];
+
+let table=document.getElementById("userTable");
+
+users.forEach(function(u){
+
+let row=table.insertRow();
+
+row.insertCell(0).innerHTML=u.name;
+row.insertCell(1).innerHTML=u.register;
+row.insertCell(2).innerHTML=u.profession;
+row.insertCell(3).innerHTML=u.college;
+row.insertCell(4).innerHTML=u.mobile;
+row.insertCell(5).innerHTML=u.email;
+row.insertCell(6).innerHTML=u.time;
+
+});
+
+function clearData(){
+
+localStorage.removeItem("userList");
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
