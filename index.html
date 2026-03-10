@@ -52,6 +52,12 @@ button:hover{
 background:#008ecc;
 }
 
+#status{
+margin-top:10px;
+font-size:14px;
+color:#ffd700;
+}
+
 </style>
 
 </head>
@@ -76,6 +82,8 @@ background:#008ecc;
 
 <button onclick="goToCalculator()">Submit</button>
 
+<p id="status"></p>
+
 </div>
 
 <script>
@@ -89,16 +97,22 @@ let college=document.getElementById("college").value;
 let mobile=document.getElementById("mobile").value;
 let email=document.getElementById("email").value;
 
+let status=document.getElementById("status");
+
 if(name=="" || profession=="" || college=="" || mobile=="" || email==""){
 alert("Please fill all required fields");
 return;
 }
 
-/* store current user name */
+/* show loading message */
+
+status.innerText="Saving your data... Please wait.";
+
+/* store username */
 
 localStorage.setItem("username",name);
 
-/* save user history locally */
+/* store data locally */
 
 let users=JSON.parse(localStorage.getItem("userList")) || [];
 
@@ -134,16 +148,28 @@ method:"POST",
 body:JSON.stringify(sheetData)
 })
 .then(response=>response.text())
-.then(data=>{
-console.log("Saved to Google Sheets:",data);
-})
-.catch(error=>{
-console.log("Error:",error);
-});
+.then(result=>{
 
-/* redirect to calculator */
+console.log("Saved to Google Sheets:",result);
+
+status.innerText="✔ Data saved successfully! Redirecting...";
+
+/* redirect after success */
+
+setTimeout(function(){
 
 window.location.href="fd_calculator.html";
+
+},1000);
+
+})
+.catch(error=>{
+
+console.error("Error:",error);
+
+status.innerText="❌ Failed to save data. Please try again.";
+
+});
 
 }
 
@@ -152,4 +178,3 @@ window.location.href="fd_calculator.html";
 </body>
 
 </html>
-
