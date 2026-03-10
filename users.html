@@ -35,16 +35,6 @@ background:#00aaff;
 color:white;
 }
 
-button{
-margin-top:20px;
-padding:10px 20px;
-font-size:16px;
-border:none;
-background:#ff4444;
-color:white;
-cursor:pointer;
-}
-
 </style>
 
 </head>
@@ -67,34 +57,25 @@ cursor:pointer;
 
 </table>
 
-<button onclick="clearData()">Clear Data</button>
-
 <script>
 
-let users=JSON.parse(localStorage.getItem("userList")) || [];
+let users = JSON.parse(localStorage.getItem("userList")) || [];
 
-let table=document.getElementById("userTable");
+let table = document.getElementById("userTable");
 
 users.forEach(function(u){
 
-let row=table.insertRow();
+let row = table.insertRow();
 
-row.insertCell(0).innerHTML=u.name;
-row.insertCell(1).innerHTML=u.register;
-row.insertCell(2).innerHTML=u.profession;
-row.insertCell(3).innerHTML=u.college;
-row.insertCell(4).innerHTML=u.mobile;
-row.insertCell(5).innerHTML=u.email;
-row.insertCell(6).innerHTML=u.time;
+row.insertCell(0).innerHTML = u.name;
+row.insertCell(1).innerHTML = u.register;
+row.insertCell(2).innerHTML = u.profession;
+row.insertCell(3).innerHTML = u.college;
+row.insertCell(4).innerHTML = u.mobile;
+row.insertCell(5).innerHTML = u.email;
+row.insertCell(6).innerHTML = u.time;
 
 });
-
-function clearData(){
-
-localStorage.removeItem("userList");
-location.reload();
-
-}
 
 </script>
 
